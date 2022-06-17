@@ -13,7 +13,7 @@ var width = 768;
 var height = 768;
 
 // for sine curve
-let xspacing = 6*scal; // Distance between each horizontal location
+let xspacing = 2*scal; // Distance between each horizontal location
 let w; // Width of entire wave
 let theta = 0.0; // Start angle at 0
 let amplitude = 18.0; // Height of wave
@@ -26,7 +26,7 @@ function preload() {
     //font = loadFont("../assets/misaki_gothic.ttf");
 
     // Images
-    imgch = loadImage("assets/img/child4x.png");
+    imgch = loadImage("assets/img/child.png");
     imgbk = loadImage("assets/img/back4x.png");
     imgwhitebk = loadImage("assets/img/bkwhite4x.png");
     imgfishsc = loadImage("assets/img/fish_small.png");
@@ -35,11 +35,13 @@ function preload() {
     imgfishlb = loadImage("assets/img/fish_large_bl.png");
     imgwhale = loadImage("assets/img/whale.png");
     imgelephant = loadImage("assets/img/elephant.png");
+    imgrain = loadImage("assets/img/rain.png");
 }
 
 function setup () {
     createCanvas(actualSize*scal, actualSize*scal);
     background(255);
+    frameRate(33);
 
     // for sine curve
     //ly = createCanvas(actualSize*scal, actualSize*scal);
@@ -73,18 +75,18 @@ function draw() {
 
     // 魚群の生成
     //tint(255, 205);
-    if (y < v - 13) {
+    if (y < v - 44) {
         image(imgfishsc, x+u0, y, 52,12);
-    } else if (v-13 <= y && y < v) {
+    } else if (v-44 <= y && y < v-33) {
         image(imgfishlc, x+u0, y, 54, 54);
-    } else if (t+13 < y) {
+    } else if (t+9 < y) {
         image(imgfishsb, x+s0, y, 52, 12);
-    } else if (t<y && y <= t+13) {
+    } else if (t-9<y && y <= t+9) {
         image(imgfishlb, x+s0, y, 54, 54);
     }
 
     // ひし形の場合
-    if (y < v - 13) {// 上側は水色
+    if (y < v - 33) {// 上側は水色
         r = int(random(2, 15))*2-1;// 奇数で出力
         tr = random(0, 50);
         for (i = 0; i < r; i++) {
@@ -100,9 +102,9 @@ function draw() {
                 }
             }
         }
-    } else if (v -13 <= y && y <= v) {// 上の境界上の描画
-    } else if (t <= y && y < t +13) {// 下の境界上の描画
-    } else if (y >= t+13) {
+    } else if (v -33 <= y && y <= v) {// 上の境界上の描画
+    } else if (t-66 <= y && y < t-33) {// 下の境界上の描画
+    } else if (y >= t-33) {
         r = int(random(2, 15))*2-1;// 奇数で出力
         tr = random(0, 50);
         for (i = 0; i < r; i++) {
@@ -124,7 +126,7 @@ function draw() {
     calcWave();
     renderWave();
     //image(ly, 0, 0);
-    theta += 0.02;
+    theta += 0.001;
     let phi = theta;
     for (let i = 0; i < yvalues.length; i++){
         yvalues[i] = sin(phi) * amplitude;
@@ -135,17 +137,20 @@ function draw() {
     for (let x = 0; x < yvalues.length; x++) {
         rect(x*xspacing, height/2+yvalues[x], scal, scal);
         //erase();
-        rect(x*xspacing, height/2+yvalues[x]-scal, scal, scal, 0);
+        //rect(x*xspacing, height/2+yvalues[x]-scal, scal, scal, 0);
         //noErase();
-    }   
+    }
 
     // 手前画像の描画
+    image(imgrain, 0, 0, actualSize*scal, actualSize*scal);
     image(imgwhale, 0, 0, actualSize*scal, actualSize*scal);
     image(imgch, 0, 0, actualSize*scal, actualSize*scal);
-    // 像の目の描写
+    // 目の描写
     noStroke();
     fill(103,214,235);
     rect(186*scal, 68*scal, scal, scal);
+    rect(196*scal, 161*scal, scal, scal);
+    rect(225*scal, 281*scal, scal, scal);
 
     //noLoop();
 }
