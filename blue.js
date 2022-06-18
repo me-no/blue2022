@@ -67,7 +67,7 @@ function draw() {
     u = int(random(-actualSize, actualSize))*scal;
     v = -u*u/1661+v0;
 
-    x = int(random(-actualSize/2, actualSize/2))*scal;// x とy が魚の頂点; x はグラフの横移動を考慮した範囲
+    x = int(random(-actualSize/2-26, actualSize/2))*scal;// x とy が魚の頂点; x はグラフの横移動を考慮した範囲
     y = int(random(-15, actualSize))*scal;
 
     v = -(x*x/1963)*scal+v0;// 上側の境界
@@ -75,14 +75,14 @@ function draw() {
 
     // 魚群の生成
     //tint(255, 205);
-    if (y < v - 44) {
+    if (y < v - 66) {
         image(imgfishsc, x+u0, y, 52,12);
-    } else if (v-44 <= y && y < v-33) {
-        image(imgfishlc, x+u0, y, 54, 54);
-    } else if (t+9 < y) {
+    } else if (v-66 <= y && y < v-33) {
+        image(imgfishlc, x+u0, y, 58, 64);
+    } else if (t+16 < y) {
         image(imgfishsb, x+s0, y, 52, 12);
-    } else if (t-9<y && y <= t+9) {
-        image(imgfishlb, x+s0, y, 54, 54);
+    } else if (t-22<y && y <= t+16) {
+        image(imgfishlb, x+s0, y, 58, 64);
     }
 
     // ひし形の場合
@@ -133,7 +133,7 @@ function draw() {
         phi +=dx;
     }
     noStroke();
-    fill(255);
+    fill(255, 131);
     for (let x = 0; x < yvalues.length; x++) {
         rect(x*xspacing, height/2+yvalues[x], scal, scal);
         //erase();
