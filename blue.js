@@ -5,6 +5,7 @@ var colors = [
     ["cyan", 89, 147, 171], 
     ["blue", 31, 110, 158],
     ["deepblue", 31, 95, 143],
+    ["blueline", 0, 33, 54],
 ];
 
 // for actual size
@@ -29,7 +30,7 @@ function preload() {
     imgch = loadImage("assets/img/child.png");
     imgbk = loadImage("assets/img/back4x.png");
     imgwhitebk = loadImage("assets/img/bkwhite4x.png");
-    imgfishsc = loadImage("assets/img/fish_small.png");
+    imgfishsc = loadImage("assets/img/fish_small.png");0
     imgfishlc = loadImage("assets/img/fish_large.png");
     imgfishsb = loadImage("assets/img/fish_small_bl.png");
     imgfishlb = loadImage("assets/img/fish_large_bl.png");
@@ -41,6 +42,7 @@ function preload() {
 function setup () {
     createCanvas(actualSize*scal, actualSize*scal);
     background(255);
+    //background(colors[4][1], colors[4][2], colors[4][3]);
     frameRate(33);
 
     // for sine curve
@@ -133,7 +135,7 @@ function draw() {
         phi +=dx;
     }
     noStroke();
-    fill(255, 131);
+    fill(255);
     for (let x = 0; x < yvalues.length; x++) {
         rect(x*xspacing, height/2+yvalues[x], scal, scal);
         //erase();
@@ -177,5 +179,9 @@ function calcWave() {
     for (let x = 0; x < yvalues.length; x++) {
       //ly.ellipse(x * xspacing, height / 2 + yvalues[x], 16, 16);
     }
+  }
+
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
   }
   
